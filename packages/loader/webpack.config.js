@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const IS_DEV = process.env.NODE_ENV === "development";
 
-console.log(path.resolve(__dirname, "..", "server", "./node_modules/react"));
 const externals = {
   react: 'commonjs react',
   "prop-types": {
@@ -15,7 +14,7 @@ const externals = {
   },
   graphql: "graphql",
   "@apollo/react-hooks": "@apollo/react-hooks",
-  "apollo-boost": "ApolloBoost"
+  "apollo-boost": "apollo-boost"
 };
 
 let webpackConfig = {
@@ -23,7 +22,7 @@ let webpackConfig = {
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index.js",
-    libraryTarget: "umd"
+    libraryTarget: "commonjs2"
   },
   devServer: {
     port: 4001

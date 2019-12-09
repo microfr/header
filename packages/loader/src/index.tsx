@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import ApolloClient, { gql } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ErrorBoundary from "@microfr/error-boundary";
 import Loader from "./Loader";
 
 interface Props {
-  token?: string;
   namespace: string;
   /*
   URI of GraphQL server to be passed into apollo client.
@@ -35,9 +33,5 @@ const _LoaderWrapper: React.FunctionComponent<Props> = ({ uri, ...props }) => {
   );
 };
 _LoaderWrapper.displayName = "LoaderWrapper";
-
-_LoaderWrapper.propTypes = {
-  token: PropTypes.string
-};
 
 export default React.memo(_LoaderWrapper);

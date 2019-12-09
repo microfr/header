@@ -1,28 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import "./styles.local.scss";
 
-const CREDIT_QUERY = gql`
+const VIEWER_QUERY = gql`
   query {
     viewer {
-      name
+      firstName
+      lastName
       id
-      
     }
   }
 `;
 
 const _Header: React.FunctionComponent = () => {
-  const { data, loading } = useQuery(CREDIT_QUERY, {
-    variables: {
-      id: "1"
+  const [user, setUser] = useState(null);
+  const { loading } = useQuery(VIEWER_QUERY, {
+    onCompleted: ({ viewer }) => {
+      setUser(viewer);
+    },
+    onError: err => {
+      throw err;
     }
   });
   if (loading) return <div>Loading</div>;
   return (
     <header className="header">
-      <h1 className="header__title">Microfr Bank</h1>
+      <div className="header__left">
+        <h1 className="header__title">Microfr Bank</h1>
+      </div>
+      {user && (
+        <div className="header__right">
+          {user.firstName} {user.lastName}
+        </div>
+      )}
     </header>
   );
 };

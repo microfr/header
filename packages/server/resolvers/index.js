@@ -1,8 +1,8 @@
-const { getCreditScore } = require("./credit.query");
+const { getViewer } = require("./viewer.query");
 const { getAsset } = require('./asset.query')
 module.exports = {
   Query: {
-    creditScore: getCreditScore,
+    viewer: getViewer,
     asset: getAsset
   }
 };
